@@ -5,20 +5,17 @@
   "description": "Frontity project",
   "keywords": [],
   "scripts": {
-    "start": "frontity dev",
-    "postinstall": "symlink-dir ./packages/mars-theme ./node_modules/@frontity/mars-theme",
-    "clean": "rm -rf node_modules && yarn"
+    "dev": "frontity dev",
+    "build": "frontity build",
+    "serve": "frontity serve"
   },
   "prettier": {},
   "dependencies": {
     "@frontity/core": "1.5.1",
     "@frontity/html2react": "1.3.1",
-    "@frontity/mars-theme": "1.4.0",
+    "@frontity/mars-theme": "./packages/mars-theme",
     "@frontity/tiny-router": "1.1.1",
     "@frontity/wp-source": "1.6.2",
-    "frontity": "1.5.2",
-    "react-spring": "8.0.27",
-    "symlink-dir": "3.1.2",
-    "webpack": "4.42.1"
+    "frontity": "1.5.2"
   }
 }
