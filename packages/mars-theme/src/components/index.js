@@ -5,36 +5,30 @@ import Switch from "@frontity/components/switch";
 import Header from "./header";
 import List from "./list";
 import Post from "./post";
-import Page404 from "./page404.js";
 import Loading from "./loading";
-
-const globalStyles = css`
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  }
-  a,
-  a:visited {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
+import Title from "./title";
+import PageError from "./page-error";
 
 const Theme = ({ state }) => {
-  const transitions = useTransition(state.router.link, link => link, {
+  const transitions = useTransition(state.router.link, (link) => link, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    leave: { opacity: 0 },
   });
   return (
     <>
+      {/* Add some metatags to the <head> of the HTML. */}
+      <Title />
       <Head>
-        <title>{state.frontity.title}</title>
         <meta name="description" content={state.frontity.description} />
         <html lang="en" />
       </Head>
+
+      {/* Add some global styles for the whole site, like body or a's. 
+      Not classes here because we use CSS-in-JS. Only global HTML tags. */}
       <Global styles={globalStyles} />
+
+      {/* Add the header of the site. */}
       <HeadContainer>
         <Header />
       </HeadContainer>
@@ -48,7 +42,7 @@ const Theme = ({ state }) => {
                   <Loading when={data.isFetching} />
                   <List when={data.isArchive} />
                   <Post when={data.isPostType} />
-                  <Page404 when={data.is404} />
+                  <PageError when={data.isError} />
                 </Switch>
               </Body>
             </Absolute>
@@ -60,6 +54,19 @@ const Theme = ({ state }) => {
 };
 
 export default connect(Theme);
+
+const globalStyles = css`
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+      "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  a,
+  a:visited {
+    color: inherit;
+    text-decoration: none;
+  }
+`;
 
 const HeadContainer = styled.div`
   display: flex;
