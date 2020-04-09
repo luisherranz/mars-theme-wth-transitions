@@ -7,9 +7,9 @@ const Link = ({
   link,
   className,
   children,
-  "aria-current": ariaCurrent
+  "aria-current": ariaCurrent,
 }) => {
-  const onClick = event => {
+  const onClick = (event) => {
     // Do nothing if it's an external link
     if (link.startsWith("http")) return;
 
@@ -18,7 +18,11 @@ const Link = ({
     actions.router.set(link);
 
     // Scroll the page to the top
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
 
     // if the menu modal is open, close it so it doesn't block rendering
     if (state.theme.isMobileMenuOpen) {
